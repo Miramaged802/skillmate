@@ -15,6 +15,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CommunityDetails from "./pages/CommunityDetails";
+import Profile from "./pages/Profile";
 import Checkout from "./pages/Checkout";
 const theme = createTheme({
   palette: {
@@ -50,6 +51,7 @@ function App() {
                     element={<CommunityDetails />}
                   />
                   <Route path="/exchange" element={<Exchange />} />
+                  <Route path="/profile" element={<Profile />} />
                   <Route path="/checkout/:sessionId" element={<Checkout />} />
                   <Route
                     path="/dashboard"
