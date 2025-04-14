@@ -88,11 +88,13 @@ export const communities = [
     },
     admins: [
       {
+        id: "b2c3d4e5-f6a7-8901-bcde-2345678901bc",
         name: "Alex Chen",
         role: "Community Lead",
         avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
       },
       {
+        id: "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
         name: "Sarah Miller",
         role: "Tech Mentor",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
@@ -200,11 +202,13 @@ export const communities = [
     },
     admins: [
       {
+        id: "e5f6a7b8-c9d0-1234-ef01-5678901234ef",
         name: "Emily Wang",
         role: "Data Science Lead",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
       },
       {
+        id: "a5b6c7d8-e9f0-1234-8901-5678901234a5",
         name: "Michael Johnson",
         role: "ML Expert",
         avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
@@ -308,11 +312,13 @@ export const communities = [
     ],
     admins: [
       {
+        id: "b6c7d8e9-f0a1-2345-9012-6789012345b6",
         name: "Lisa Park",
         role: "Design Lead",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
       },
       {
+        id: "c7d8e9f0-a1b2-3456-0123-7890123456c7",
         name: "David Chen",
         role: "Creative Director",
         avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
@@ -418,11 +424,13 @@ export const communities = [
     },
     admins: [
       {
+        id: "d8e9f0a1-b2c3-4567-1234-8901234567d8",
         name: "Omar Khalid",
         role: "Security Lead",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
       },
       {
+        id: "e9f0a1b2-c3d4-5678-2345-9012345678e9",
         name: "Fatima Ali",
         role: "Penetration Tester",
         avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9",
@@ -517,11 +525,13 @@ export const communities = [
     ],
     admins: [
       {
+        id: "f0a1b2c3-d4e5-6789-3456-0123456789f0",
         name: "Ahmed Hassan",
         role: "Founder Lead",
         avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
       },
       {
+        id: "a1b2c3d4-e5f6-7890-4567-1234567890a1",
         name: "Layla Omar",
         role: "Business Mentor",
         avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f",
@@ -608,11 +618,13 @@ export const communities = [
     ],
     admins: [
       {
+        id: "b2c3d4e5-f6a7-8901-5678-2345678901b2",
         name: "Noor Salem",
         role: "Content Lead",
         avatar: "https://images.unsplash.com/photo-1517365830460-955ce3ccd263",
       },
       {
+        id: "c3d4e5f6-a7b8-9012-6789-3456789012c3",
         name: "Youssef Amr",
         role: "Video Editor", // Fixed typo from 'pront'
         avatar: "https://images.unsplash.com/photo-1506794778202-cbfcc65c5967",
@@ -719,11 +731,13 @@ export const communities = [
     },
     admins: [
       {
+        id: "d4e5f6a7-b8c9-0123-7890-4567890123d4",
         name: "Rana Mahmoud",
         role: "AI Lead",
         avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9",
       },
       {
+        id: "e5f6a7b8-c9d0-1234-8901-5678901234e5",
         name: "Khaled Sami",
         role: "ML Researcher",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
@@ -827,11 +841,13 @@ export const communities = [
     ],
     admins: [
       {
+        id: "f6a7b8c9-d0e1-2345-9012-6789012345f6",
         name: "Aya Nasser",
         role: "Photography Lead",
         avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f",
       },
       {
+        id: "a7b8c9d0-e1f2-3456-0123-7890123456a7",
         name: "Hassan Zaki",
         role: "Creative Mentor",
         avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
@@ -926,11 +942,13 @@ export const communities = [
     ],
     admins: [
       {
+        id: "b8c9d0e1-f2a3-4567-1234-8901234567b8",
         name: "Mona Ibrahim",
         role: "Marketing Lead",
         avatar: "https://images.unsplash.com/photo-1517365830460-955ce3ccd263",
       },
       {
+        id: "c9d0e1f2-a3b4-5678-2345-9012345678c9",
         name: "Sami Farid",
         role: "SEO Expert",
         avatar: "https://images.unsplash.com/photo-1506794778202-cbfcc65c5967",

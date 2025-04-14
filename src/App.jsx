@@ -17,6 +17,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CommunityDetails from "./pages/CommunityDetails";
 import Profile from "./pages/Profile";
 import Checkout from "./pages/Checkout";
+import ProfileDetails from "./pages/ProfileDetails";
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -52,6 +55,10 @@ function App() {
                   />
                   <Route path="/exchange" element={<Exchange />} />
                   <Route path="/profile" element={<Profile />} />
+                  <Route
+                    path="/profile-details/:id"
+                    element={<ProfileDetails />}
+                  />
                   <Route path="/checkout/:sessionId" element={<Checkout />} />
                   <Route
                     path="/dashboard"

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -85,7 +85,7 @@ const GroupDetails = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-violet-600/80 p-8 flex flex-col justify-end">
               <Typography variant="h4" className="font-bold mb-2 text-white">
-                {groupData.name} | {groupData.name}
+                {groupData.name}
               </Typography>
               <Typography variant="subtitle1" className="text-blue-100">
                 {groupData.description}
@@ -206,24 +206,30 @@ const GroupDetails = () => {
                 </Typography>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {groupData.admins?.map((admin) => (
-                    <div
-                      key={admin.name}
-                      className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
+                    <Link
+                      key={admin.id}
+                      to={`/profile-details/${admin.id}`}
+                      className="no-underline"
                     >
-                      <Avatar src={admin.avatar} className="w-12 h-12" />
-                      <div>
-                        <Typography variant="subtitle1" className="font-medium">
-                          {admin.name}
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          className="text-gray-600 flex items-center gap-1"
-                        >
-                          <Shield className="w-4 h-4" />
-                          {admin.role}
-                        </Typography>
+                      <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <Avatar src={admin.avatar} className="w-12 h-12" />
+                        <div>
+                          <Typography
+                            variant="subtitle1"
+                            className="font-medium text-blue-600 hover:underline"
+                          >
+                            {admin.name}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            className="text-gray-600 flex items-center gap-1"
+                          >
+                            <Shield className="w-4 h-4" />
+                            {admin.role}
+                          </Typography>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>

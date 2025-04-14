@@ -24,13 +24,11 @@ import {
   Briefcase,
   Edit,
   Github,
-  Linkedin,
   Globe,
   Plus,
   Star,
   MessageCircle,
   Trash,
-  Mail,
 } from "lucide-react";
 
 // Load registration data from localStorage with fallbacks
@@ -73,18 +71,16 @@ const Profile = () => {
 
   // Initialize states with localStorage data
   const [name, setName] = useState(registrationData.fullName || "Guest User");
-  const [email, setEmail] = useState(registrationData.email || "");
   const [jobTitle, setJobTitle] = useState("Senior Software Developer");
   const [location, setLocation] = useState("San Francisco, CA");
   const [bio, setBio] = useState(
     "Passionate software developer with 5+ years of experience in full-stack development. Specialized in React, Node.js, and cloud technologies. Always eager to learn and share knowledge with the community."
   );
 
-  console.log("Initial state - name:", name, "email:", email);
+  console.log("Initial state - name:", name);
 
   const [editForm, setEditForm] = useState({
     name: name,
-    email: email,
     jobTitle: jobTitle,
     location: location,
     bio: bio,
@@ -194,7 +190,7 @@ const Profile = () => {
   };
 
   const handleEditProfile = () => {
-    setEditForm({ name, email, jobTitle, location, bio });
+    setEditForm({ name, jobTitle, location, bio });
     setEditDialogOpen(true);
   };
 
@@ -259,14 +255,9 @@ const Profile = () => {
       alert("Name cannot be empty");
       return;
     }
-    if (editForm.email && !validateEmail(editForm.email)) {
-      alert("Please enter a valid email");
-      return;
-    }
 
     // Update states
     setName(editForm.name);
-    setEmail(editForm.email);
     setJobTitle(editForm.jobTitle);
     setLocation(editForm.location);
     setBio(editForm.bio);
@@ -274,7 +265,6 @@ const Profile = () => {
     // Save to localStorage
     const profileData = {
       fullName: editForm.name,
-      email: editForm.email,
       jobTitle: editForm.jobTitle,
       location: editForm.location,
       bio: editForm.bio,
@@ -286,7 +276,6 @@ const Profile = () => {
     const updatedRegistrationData = {
       ...registrationData,
       fullName: editForm.name,
-      email: editForm.email,
     };
     localStorage.setItem(
       "registrationData",
@@ -458,12 +447,6 @@ const Profile = () => {
                   <MapPin className="w-4 h-4" />
                   <span>{location}</span>
                 </div>
-                {email && (
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Mail className="w-4 h-4" />
-                    <span>{email}</span>
-                  </div>
-                )}
                 <div className="flex items-center gap-2 text-gray-600">
                   <Calendar className="w-4 h-4" />
                   <span>Joined March 2023</span>
@@ -472,9 +455,6 @@ const Profile = () => {
               <div className="flex gap-3 mt-4">
                 <IconButton className="text-gray-600 hover:text-blue-600">
                   <Github className="w-5 h-5" />
-                </IconButton>
-                <IconButton className="text-gray-600 hover:text-blue-600">
-                  <Linkedin className="w-5 h-5" />
                 </IconButton>
                 <IconButton className="text-gray-600 hover:text-blue-600">
                   <Globe className="w-5 h-5" />
@@ -742,15 +722,6 @@ const Profile = () => {
                 setEditForm({ ...editForm, name: e.target.value })
               }
               required
-            />
-            <TextField
-              margin="dense"
-              label="Email"
-              fullWidth
-              value={editForm.email}
-              onChange={(e) =>
-                setEditForm({ ...editForm, email: e.target.value })
-              }
             />
             <TextField
               margin="dense"

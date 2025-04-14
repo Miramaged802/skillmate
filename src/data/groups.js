@@ -77,11 +77,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
         name: "Sarah Miller",
         role: "Group Admin",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
       },
       {
+        id: "b2c3d4e5-f6a7-8901-bcde-2345678901bc",
         name: "Alex Chen",
         role: "Moderator",
         avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
@@ -147,11 +149,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "c3d4e5f6-a7b8-9012-cdef-3456789012cd",
         name: "Mike Johnson",
         role: "Analytics Lead",
         avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7",
       },
       {
+        id: "d4e5f6a7-b8c9-0123-def0-4567890123de",
         name: "Lisa Chen",
         role: "Data Expert",
         avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
@@ -216,11 +220,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "e5f6a7b8-c9d0-1234-ef01-5678901234ef",
         name: "Emily Wang",
         role: "Design Lead",
         avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
       },
       {
+        id: "f6a7b8c9-d0e1-2345-f012-6789012345f0",
         name: "David Park",
         role: "UX Mentor",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
@@ -285,11 +291,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "a7b8c9d0-e1f2-3456-0123-7890123456a7",
         name: "Robert Kim",
         role: "ML Engineer",
         avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
       },
       {
+        id: "8",
         name: "Anna Lee",
         role: "AI Researcher",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
@@ -354,11 +362,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "c9d0e1f2-a3b4-5678-2345-90",
         name: "Tom Wilson",
         role: "Marketing Lead",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
       },
       {
+        id: "d0e1f2a3-b4c5-6789-3456-0123456789d0",
         name: "Sarah Brown",
         role: "SEO Expert",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
@@ -423,11 +433,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "e1f2a3b4-c5d6-7890-4567-1234567890e1",
         name: "Chris Taylor",
         role: "Content Lead",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
       },
       {
+        id: "f2a3b4c5-d6e7-8901-5678-2345678901f2",
         name: "Emma White",
         role: "Video Expert",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
@@ -492,11 +504,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "a3b4c5d6-e7f8-9012-6789-3456789012a3",
         name: "John Doe",
         role: "Tech Lead",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
       },
       {
+        id: "14",
         name: "Jane Smith",
         role: "Frontend Expert",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
@@ -561,11 +575,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "c5d6e7f8-a9b0-1234-8901-5678901234c5",
         name: "Michael Lee",
         role: "Lead Photographer",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
       },
       {
+        id: "d6e7f8a9-b0c1-2345-9012-6789012345d6",
         name: "Sophie Chen",
         role: "Editor",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
@@ -630,11 +646,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "e7f8a9b0-c1d2-3456-0123-7890123456e7",
         name: "David Kim",
         role: "Coffee Expert",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
       },
       {
+        id: "f8a9b0c1-d2e3-4567-1234-8901234567f8",
         name: "Maria Garcia",
         role: "Barista",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
@@ -699,11 +717,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "a9b0c1d2-e3f4-5678-2345-9012345678a9",
         name: "Elizabeth Park",
         role: "Book Club Lead",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
       },
       {
+        id: "b0c1d2e3-f4a5-6789-3456-0123456789b0",
         name: "James Wilson",
         role: "Discussion Moderator",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
@@ -768,11 +788,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "b0c1d2e3-f4a5-6789-3456-0123456789b0",
         name: "Robert Johnson",
         role: "Network Lead",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
       },
       {
+        id: "d2e3f4a5-b6c7-8901-5678-2345678901d2",
         name: "Michelle Lee",
         role: "Events Coordinator",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
@@ -837,11 +859,13 @@ export const groups = [
     ],
     admins: [
       {
+        id: "e3f4a5b6-c7d8-9012-6789-3456789012e3",
         name: "Alex Turner",
         role: "Production Lead",
         avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
       },
       {
+        id: "f4a5b6c7-d8e9-0123-7890-4567890123f4",
         name: "Sarah Martinez",
         role: "Audio Engineer",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
