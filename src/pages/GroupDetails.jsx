@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import {
   Button,
@@ -10,6 +10,13 @@ import {
   Tabs,
   Box,
   Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Snackbar,
+  IconButton,
 } from "@mui/material";
 import {
   Users,
@@ -20,6 +27,9 @@ import {
   BookOpen,
   Target,
   MessageSquare,
+  ThumbsUp,
+  Edit,
+  Delete,
 } from "lucide-react";
 import { groups } from "../data/groups";
 
@@ -41,9 +51,54 @@ function TabPanel(props) {
 const GroupDetails = () => {
   const { groupId } = useParams();
   const navigate = useNavigate();
-  const [tabValue, setTabValue] = React.useState(0);
+  const [tabValue, setTabValue] = useState(0);
+  const [openAddPost, setOpenAddPost] = useState(false);
+  const [openEditPost, setOpenEditPost] = useState(false);
+  const [openAddComment, setOpenAddComment] = useState(null);
+  const [postData, setPostData] = useState({
+    title: "",
+    content: "",
+  });
+  const [editPostData, setEditPostData] = useState({
+    id: "",
+    title: "",
+    content: "",
+  });
+  const [commentData, setCommentData] = useState("");
+  const [showAlert, setShowAlert] = useState({ open: false, message: "" });
+  const [posts, setPosts] = useState([]);
+
+  // Get current user data from localStorage
+  const currentUser = JSON.parse(localStorage.getItem("registrationData")) || {
+    id: "guest",
+    fullName: "Guest User",
+    email: "guest@example.com",
+  };
 
   const groupData = groups.find((group) => group.id === groupId);
+
+  useEffect(() => {
+    // Initialize posts with user likes tracking
+    setPosts([
+      {
+        id: "post1",
+        title: "Welcome to the Group!",
+        content: "Let's share some ideas and learn together.",
+        user: { id: "admin1", name: "Group Admin" },
+        date: "2025-04-10",
+        likes: 5,
+        likedBy: [], // Array to track who liked the post
+        comments: [
+          {
+            id: "comment1",
+            content: "Excited to be here!",
+            user: { id: "user2", name: "Member One" },
+            date: "2025-04-10",
+          },
+        ],
+      },
+    ]);
+  }, []);
 
   if (!groupData) {
     return (
@@ -70,6 +125,153 @@ const GroupDetails = () => {
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
+  };
+
+  const handleOpenAddPost = () => {
+    setOpenAddPost(true);
+  };
+
+  const handleCloseAddPost = () => {
+    setOpenAddPost(false);
+    setPostData({ title: "", content: "" });
+  };
+
+  const handleOpenEditPost = (post) => {
+    setEditPostData({
+      id: post.id,
+      title: post.title,
+      content: post.content,
+    });
+    setOpenEditPost(true);
+  };
+
+  const handleCloseEditPost = () => {
+    setOpenEditPost(false);
+    setEditPostData({ id: "", title: "", content: "" });
+  };
+
+  const handleOpenAddComment = (postId) => {
+    setOpenAddComment(postId);
+  };
+
+  const handleCloseAddComment = () => {
+    setOpenAddComment(null);
+    setCommentData("");
+  };
+
+  const handlePostChange = (e) => {
+    const { name, value } = e.target;
+    setPostData({
+      ...postData,
+      [name]: value,
+    });
+  };
+
+  const handleEditPostChange = (e) => {
+    const { name, value } = e.target;
+    setEditPostData({
+      ...editPostData,
+      [name]: value,
+    });
+  };
+
+  const handleCommentChange = (e) => {
+    setCommentData(e.target.value);
+  };
+
+  const handleSavePost = () => {
+    const newPost = {
+      id: `post${posts.length + 1}`,
+      title: postData.title,
+      content: postData.content,
+      user: {
+        id: currentUser.email,
+        name: currentUser.fullName,
+      },
+      date: new Date().toLocaleDateString(),
+      likes: 0,
+      likedBy: [],
+      comments: [],
+    };
+    setPosts([newPost, ...posts]);
+    handleCloseAddPost();
+    setShowAlert({ open: true, message: "Post added successfully!" });
+  };
+
+  const handleSaveEditPost = () => {
+    setPosts(
+      posts.map((post) =>
+        post.id === editPostData.id
+          ? {
+              ...post,
+              title: editPostData.title,
+              content: editPostData.content,
+            }
+          : post
+      )
+    );
+    handleCloseEditPost();
+    setShowAlert({ open: true, message: "Post updated successfully!" });
+  };
+
+  const handleDeletePost = (postId) => {
+    setPosts(posts.filter((post) => post.id !== postId));
+    setShowAlert({ open: true, message: "Post deleted successfully!" });
+  };
+
+  const handleAddLike = (postId) => {
+    setPosts(
+      posts.map((post) => {
+        if (post.id === postId) {
+          const userIndex = post.likedBy.indexOf(currentUser.email);
+          if (userIndex === -1) {
+            // User hasn't liked the post yet
+            return {
+              ...post,
+              likes: post.likes + 1,
+              likedBy: [...post.likedBy, currentUser.email],
+            };
+          } else {
+            // User already liked the post, remove the like
+            return {
+              ...post,
+              likes: post.likes - 1,
+              likedBy: post.likedBy.filter(
+                (email) => email !== currentUser.email
+              ),
+            };
+          }
+        }
+        return post;
+      })
+    );
+  };
+
+  const handleAddComment = (postId) => {
+    setPosts(
+      posts.map((post) =>
+        post.id === postId
+          ? {
+              ...post,
+              comments: [
+                ...post.comments,
+                {
+                  id: `comment${post.comments.length + 1}`,
+                  content: commentData,
+                  user: currentUser,
+                  date: new Date().toLocaleDateString(),
+                },
+              ],
+            }
+          : post
+      )
+    );
+    handleCloseAddComment();
+    setShowAlert({ open: true, message: "Comment added successfully!" });
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert({ open: false, message: "" });
   };
 
   return (
@@ -102,8 +304,8 @@ const GroupDetails = () => {
             />
             <StatCard
               icon={<MessageCircle className="w-5 h-5" />}
-              value={groupData.discussions?.length || 0}
-              label="Discussions"
+              value={posts.length}
+              label="Posts"
             />
             <StatCard
               icon={<Calendar className="w-5 h-5" />}
@@ -145,6 +347,11 @@ const GroupDetails = () => {
             <Tab
               label="Resources"
               icon={<BookOpen className="w-4 h-4" />}
+              iconPosition="start"
+            />
+            <Tab
+              label="Posts"
+              icon={<MessageCircle className="w-4 h-4" />}
               iconPosition="start"
             />
           </Tabs>
@@ -306,7 +513,289 @@ const GroupDetails = () => {
               ))}
             </div>
           </TabPanel>
+
+          <TabPanel value={tabValue} index={4}>
+            <div className="space-y-4">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleOpenAddPost}
+                startIcon={<MessageCircle className="w-4 h-4" />}
+                sx={{
+                  mb: 2,
+                  background: "linear-gradient(to right, #2563eb, #7c3aed)",
+                  "&:hover": {
+                    background: "linear-gradient(to right, #1d4ed8, #6d28d9)",
+                  },
+                  fontWeight: "bold",
+                  borderRadius: "8px",
+                }}
+              >
+                Add New Post
+              </Button>
+              {posts.length > 0 ? (
+                posts.map((post) => (
+                  <Card key={post.id} className="p-4">
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-2">
+                          <Avatar className="w-8 h-8" />
+                          <Typography
+                            variant="subtitle2"
+                            className="font-medium"
+                          >
+                            {post.user.name}
+                          </Typography>
+                        </div>
+                        {post.user.id === currentUser.email && (
+                          <div className="flex gap-2">
+                            <IconButton
+                              onClick={() => handleOpenEditPost(post)}
+                              size="small"
+                            >
+                              <Edit className="w-4 h-4" />
+                            </IconButton>
+                            <IconButton
+                              onClick={() => handleDeletePost(post.id)}
+                              size="small"
+                            >
+                              <Delete className="w-4 h-4" />
+                            </IconButton>
+                          </div>
+                        )}
+                      </div>
+                      <Typography variant="h6">{post.title}</Typography>
+                      <Typography variant="body1" className="text-gray-700">
+                        {post.content}
+                      </Typography>
+                      <Typography variant="body2" className="text-gray-600">
+                        {post.date}
+                      </Typography>
+                      <div className="flex gap-4">
+                        <Button
+                          startIcon={<ThumbsUp className="w-4 h-4" />}
+                          onClick={() => handleAddLike(post.id)}
+                          size="small"
+                          color={
+                            post.likedBy.includes(currentUser.email)
+                              ? "primary"
+                              : "inherit"
+                          }
+                        >
+                          Like ({post.likes})
+                        </Button>
+                        <Button
+                          startIcon={<MessageSquare className="w-4 h-4" />}
+                          onClick={() => handleOpenAddComment(post.id)}
+                          size="small"
+                        >
+                          Comment ({post.comments.length})
+                        </Button>
+                      </div>
+                      {post.comments.length > 0 && (
+                        <div className="mt-4 space-y-2">
+                          <Typography
+                            variant="subtitle2"
+                            className="font-medium"
+                          >
+                            Comments
+                          </Typography>
+                          {post.comments.map((comment) => (
+                            <div
+                              key={comment.id}
+                              className="p-2 bg-gray-50 rounded-lg"
+                            >
+                              <div className="flex items-center gap-2">
+                                <Avatar className="w-6 h-6" />
+                                <Typography
+                                  variant="body2"
+                                  className="font-medium"
+                                >
+                                  {comment.user.name}
+                                </Typography>
+                              </div>
+                              <Typography
+                                variant="body2"
+                                className="text-gray-700"
+                              >
+                                {comment.content}
+                              </Typography>
+                              <Typography
+                                variant="caption"
+                                className="text-gray-500"
+                              >
+                                {comment.date}
+                              </Typography>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </Card>
+                ))
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  No posts available.
+                </Typography>
+              )}
+            </div>
+          </TabPanel>
         </Card>
+
+        {/* Add Post Dialog */}
+        <Dialog
+          open={openAddPost}
+          onClose={handleCloseAddPost}
+          maxWidth="sm"
+          fullWidth
+        >
+          <DialogTitle>
+            <div className="text-xl font-bold text-gray-800">Add New Post</div>
+          </DialogTitle>
+          <DialogContent>
+            <div className="py-4 space-y-4">
+              <TextField
+                fullWidth
+                label="Post Title"
+                name="title"
+                value={postData.title}
+                onChange={handlePostChange}
+                variant="outlined"
+                margin="dense"
+              />
+              <TextField
+                fullWidth
+                label="Content"
+                name="content"
+                value={postData.content}
+                onChange={handlePostChange}
+                variant="outlined"
+                margin="dense"
+                multiline
+                rows={4}
+              />
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseAddPost} color="primary">
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSavePost}
+              variant="contained"
+              color="primary"
+              disabled={!postData.title || !postData.content}
+              sx={{ fontWeight: "bold", borderRadius: "8px" }}
+            >
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Edit Post Dialog */}
+        <Dialog
+          open={openEditPost}
+          onClose={handleCloseEditPost}
+          maxWidth="sm"
+          fullWidth
+        >
+          <DialogTitle>
+            <div className="text-xl font-bold text-gray-800">Edit Post</div>
+          </DialogTitle>
+          <DialogContent>
+            <div className="py-4 space-y-4">
+              <TextField
+                fullWidth
+                label="Post Title"
+                name="title"
+                value={editPostData.title}
+                onChange={handleEditPostChange}
+                variant="outlined"
+                margin="dense"
+              />
+              <TextField
+                fullWidth
+                label="Content"
+                name="content"
+                value={editPostData.content}
+                onChange={handleEditPostChange}
+                variant="outlined"
+                margin="dense"
+                multiline
+                rows={4}
+              />
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseEditPost} color="primary">
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSaveEditPost}
+              variant="contained"
+              color="primary"
+              disabled={!editPostData.title || !editPostData.content}
+              sx={{ fontWeight: "bold", borderRadius: "8px" }}
+            >
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Add Comment Dialog */}
+        <Dialog
+          open={openAddComment !== null}
+          onClose={handleCloseAddComment}
+          maxWidth="sm"
+          fullWidth
+        >
+          <DialogTitle>
+            <div className="text-xl font-bold text-gray-800">Add Comment</div>
+          </DialogTitle>
+          <DialogContent>
+            <div className="py-4">
+              <TextField
+                fullWidth
+                label="Comment"
+                value={commentData}
+                onChange={handleCommentChange}
+                variant="outlined"
+                margin="dense"
+                multiline
+                rows={3}
+              />
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseAddComment} color="primary">
+              Cancel
+            </Button>
+            <Button
+              onClick={() => handleAddComment(openAddComment)}
+              variant="contained"
+              color="primary"
+              disabled={!commentData}
+              sx={{ fontWeight: "bold", borderRadius: "8px" }}
+            >
+              Submit
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Success Alert */}
+        <Snackbar
+          open={showAlert.open}
+          autoHideDuration={6000}
+          onClose={handleCloseAlert}
+        >
+          <Alert
+            onClose={handleCloseAlert}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            {showAlert.message}
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );
