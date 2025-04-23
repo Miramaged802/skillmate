@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { AuthProvider } from "./context/AuthContext";
@@ -16,9 +16,10 @@ import Register from "./pages/Auth/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CommunityDetails from "./pages/CommunityDetails";
 import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Checkout";
 import ProfileDetails from "./pages/ProfileDetails";
-
+import LoadingSpinner from "./components/LoadingSpinner";
 
 const theme = createTheme({
   palette: {
@@ -36,6 +37,21 @@ const theme = createTheme({
 });
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <AuthProvider>
       <ExchangeProvider>
@@ -70,6 +86,7 @@ function App() {
                   />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
               <Footer />
