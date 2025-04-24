@@ -23,7 +23,8 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import Blog from "./pages/Blog";
 import HelpCenter from "./pages/HelpCenter";
 import About from "./pages/About";
-
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 const theme = createTheme({
   palette: {
     primary: {
@@ -91,7 +92,9 @@ function App() {
                   <Route path="/register" element={<Register />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/help" element={<HelpCenter />} />
-                  <Route path="/about"  element={<About />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/privacy" element={<Privacy />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
