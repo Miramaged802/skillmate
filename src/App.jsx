@@ -20,6 +20,9 @@ import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Checkout";
 import ProfileDetails from "./pages/ProfileDetails";
 import LoadingSpinner from "./components/LoadingSpinner";
+import Blog from "./pages/Blog";
+import HelpCenter from "./pages/HelpCenter";
+import About from "./pages/About";
 
 const theme = createTheme({
   palette: {
@@ -86,6 +89,9 @@ function App() {
                   />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/help" element={<HelpCenter />} />
+                  <Route path="/about"  element={<About />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
