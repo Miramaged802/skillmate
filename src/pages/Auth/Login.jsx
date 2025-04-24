@@ -7,7 +7,7 @@ import {
   FormControlLabel,
   Alert,
 } from "@mui/material";
-import { Mail, Lock, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
@@ -67,7 +67,7 @@ const Login = () => {
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
         {showSuccess && (
           <Alert severity="success" className="mb-6">
-            تم التسجيل بنجاح! يمكنك الآن تسجيل الدخول | Registration successful!
+            Registration successful!
             You can now login.
           </Alert>
         )}
@@ -88,41 +88,25 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <TextField
-                fullWidth
-                label="Email address"
-                variant="outlined"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    paddingLeft: "2.5rem",
-                  },
-                }}
-              />
-            </div>
+            <TextField
+              fullWidth
+              label="Email address"
+              variant="outlined"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <TextField
-                fullWidth
-                label="Password"
-                variant="outlined"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    paddingLeft: "2.5rem",
-                  },
-                }}
-              />
-            </div>
+            <TextField
+              fullWidth
+              label="Password"
+              variant="outlined"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
 
           <div className="flex items-center justify-between">

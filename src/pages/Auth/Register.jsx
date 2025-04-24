@@ -8,7 +8,7 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import { User, Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
+import { ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 const Register = () => {
@@ -120,122 +120,90 @@ const Register = () => {
           )}
 
           <div className="space-y-4">
-            <div className="relative">
-              <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <TextField
-                fullWidth
-                label="Full Name"
-                name="fullName"
-                variant="outlined"
-                value={formData.fullName}
-                onChange={handleChange}
-                required
-                error={!!errors.fullName}
-                helperText={errors.fullName}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    paddingLeft: "2.5rem",
-                  },
-                }}
-              />
-            </div>
+            <TextField
+              fullWidth
+              label="Full Name"
+              name="fullName"
+              variant="outlined"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+              error={!!errors.fullName}
+              helperText={errors.fullName}
+            />
 
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <TextField
-                fullWidth
-                label="Email address"
-                name="email"
-                type="email"
-                variant="outlined"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                error={!!errors.email}
-                helperText={errors.email}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    paddingLeft: "2.5rem",
-                  },
-                }}
-              />
-            </div>
+            <TextField
+              fullWidth
+              label="Email address"
+              name="email"
+              type="email"
+              variant="outlined"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              error={!!errors.email}
+              helperText={errors.email}
+            />
 
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <TextField
-                fullWidth
-                label="Password"
-                name="password"
-                type={showPassword ? "text" : "password"}
-                variant="outlined"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                error={!!errors.password}
-                helperText={errors.password}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={handleTogglePassword}
-                        edge="end"
-                        aria-label="toggle password visibility"
-                      >
-                        {showPassword ? (
-                          <EyeOff size={20} />
-                        ) : (
-                          <Eye size={20} />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    paddingLeft: "2.5rem",
-                  },
-                }}
-              />
-            </div>
+            <TextField
+              fullWidth
+              label="Password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              error={!!errors.password}
+              helperText={errors.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleTogglePassword}
+                      edge="end"
+                      aria-label="toggle password visibility"
+                    >
+                      {showPassword ? (
+                        <EyeOff size={20} />
+                      ) : (
+                        <Eye size={20} />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
 
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <TextField
-                fullWidth
-                label="Confirm Password"
-                name="confirmPassword"
-                type={showConfirmPassword ? "text" : "password"}
-                variant="outlined"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                error={!!errors.confirmPassword}
-                helperText={errors.confirmPassword}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={handleToggleConfirmPassword}
-                        edge="end"
-                        aria-label="toggle password visibility"
-                      >
-                        {showConfirmPassword ? (
-                          <EyeOff size={20} />
-                        ) : (
-                          <Eye size={20} />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    paddingLeft: "2.5rem",
-                  },
-                }}
-              />
-            </div>
+            <TextField
+              fullWidth
+              label="Confirm Password"
+              name="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              variant="outlined"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleToggleConfirmPassword}
+                      edge="end"
+                      aria-label="toggle password visibility"
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff size={20} />
+                      ) : (
+                        <Eye size={20} />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
           </div>
 
           <FormControlLabel
