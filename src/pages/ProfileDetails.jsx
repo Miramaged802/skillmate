@@ -9,6 +9,9 @@ import {
   Tabs,
   Box,
   IconButton,
+  Button,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import {
   User,
@@ -21,8 +24,11 @@ import {
   Globe,
   Star,
   MessageCircle,
+  Send,
 } from "lucide-react";
 import { profiles } from "../data/profile"; // استيراد البيانات من profile.js
+import { useAuth } from "../context/AuthContext";
+import SkillExchangeRequestModal from "../components/SkillExchangeRequestModal";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,8 +48,15 @@ function TabPanel(props) {
 
 const ProfileDetails = () => {
   const { id } = useParams(); // جلب الـ id من الـ URL
+  const { user } = useAuth();
   const [profileNotFound, setProfileNotFound] = useState(false);
   const [tabValue, setTabValue] = useState(0);
+  const [requestModalOpen, setRequestModalOpen] = useState(false);
+  const [showAlert, setShowAlert] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
   // تعريف الحالة للبيانات
   const [avatar, setAvatar] = useState("");
@@ -90,6 +103,25 @@ const ProfileDetails = () => {
     setTabValue(newValue);
   };
 
+  const handleSendRequest = async (requestData) => {
+    try {
+      // Here you would typically make an API call to save the request
+      console.log("Sending skill exchange request:", requestData);
+
+      setShowAlert({
+        open: true,
+        message: "Skill exchange request sent successfully!",
+        severity: "success",
+      });
+    } catch (error) {
+      setShowAlert({
+        open: true,
+        message: "Failed to send request. Please try again.",
+        severity: "error",
+      });
+    }
+  };
+
   if (profileNotFound) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-violet-50 py-12 px-4">
@@ -134,8 +166,16 @@ const ProfileDetails = () => {
                       {jobTitle}
                     </Typography>
                   </div>
+                  {user && user.id !== id && (
+                    <Button
+                      variant="contained"
+                      startIcon={<Send className="w-4 h-4" />}
+                      onClick={() => setRequestModalOpen(true)}
+                    >
+                      Send Request
+                    </Button>
+                  )}
                 </div>
-             
               </div>
             </div>
             <div className="mt-6">
@@ -371,17 +411,33 @@ const ProfileDetails = () => {
             </div>
           </TabPanel>
         </Card>
+
+        <SkillExchangeRequestModal
+          open={requestModalOpen}
+          onClose={() => setRequestModalOpen(false)}
+          onSendRequest={handleSendRequest}
+          targetUserId={id}
+        />
+
+        <Snackbar
+          open={showAlert.open}
+          autoHideDuration={6000}
+          onClose={() => setShowAlert({ ...showAlert, open: false })}
+        >
+          <Alert
+            onClose={() => setShowAlert({ ...showAlert, open: false })}
+            severity={showAlert.severity}
+            sx={{ width: "100%" }}
+          >
+            {showAlert.message}
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );
 };
 
-const ExperienceCard = ({
-  title,
-  company,
-  period,
-  description,
-}) => (
+const ExperienceCard = ({ title, company, period, description }) => (
   <Card className="p-4">
     <div className="flex justify-between items-start">
       <div>
